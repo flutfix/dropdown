@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+import 'package:dropdown_search/dropdown.dart';
 import 'package:flutter/material.dart';
 
 import 'user_model.dart';
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'dropdownSearch Demo',
+      title: 'dropdown Demo',
       //enable this line if you want test Dark Mode
       //theme: ThemeData.dark(),
       home: MyHomePage(),
@@ -25,12 +25,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
-  final _openDropDownProgKey = GlobalKey<DropdownSearchState<int>>();
-  final _multiKey = GlobalKey<DropdownSearchState<String>>();
-  final _popupBuilderKey = GlobalKey<DropdownSearchState<String>>();
-  final _popupCustomValidationKey = GlobalKey<DropdownSearchState<int>>();
+  final _openDropDownProgKey = GlobalKey<DropdownState<int>>();
+  final _multiKey = GlobalKey<DropdownState<String>>();
+  final _popupBuilderKey = GlobalKey<DropdownState<String>>();
+  final _popupCustomValidationKey = GlobalKey<DropdownState<int>>();
   final _userEditTextController = TextEditingController(text: 'Mrs');
-  final myKey = GlobalKey<DropdownSearchState<MultiLevelString>>();
+  final myKey = GlobalKey<DropdownState<MultiLevelString>>();
   final List<MultiLevelString> myItems = [
     MultiLevelString(level1: "1"),
     MultiLevelString(level1: "2"),
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _handleCheckBoxState(updateState: false);
 
     return Scaffold(
-      appBar: AppBar(title: Text("DropdownSearch Demo")),
+      appBar: AppBar(title: Text("Dropdown Demo")),
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Form(
@@ -73,13 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: [1, 2, 3, 4, 5, 6, 7],
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>.multiSelection(
+                    child: Dropdown<int>.multiSelection(
                       clearButtonProps: ClearButtonProps(isVisible: true),
                       items: [1, 2, 3, 4, 5, 6, 7],
                     ),
@@ -94,13 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: [1, 2, 3, 4, 5, 6, 7],
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>.multiSelection(
+                    child: Dropdown<int>.multiSelection(
                       key: _popupCustomValidationKey,
                       items: [1, 2, 3, 4, 5, 6, 7],
                       popupProps: PopupPropsMultiSelection.dialog(
@@ -128,10 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: [1, 2, 3, 4, 5, 6, 7],
                       dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
+                        dropdownDecoration: InputDecoration(
                           labelText: "BottomSheet mode",
                           hintText: "Select an Int",
                         ),
@@ -142,10 +142,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: [1, 2, 3, 4, 5, 6, 7],
                       dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
+                        dropdownDecoration: InputDecoration(
                           labelText: "Modal mode",
                           hintText: "Select an Int",
                           filled: true,
@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<UserModel>(
+                    child: Dropdown<UserModel>(
                       asyncItems: (filter) => getData(filter),
                       compareFn: (i, s) => i.isEqual(s),
                       popupProps: PopupPropsMultiSelection.modalBottomSheet(
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<UserModel>.multiSelection(
+                    child: Dropdown<UserModel>.multiSelection(
                       asyncItems: (filter) => getData(filter),
                       compareFn: (i, s) => i.isEqual(s),
                       popupProps: PopupPropsMultiSelection.modalBottomSheet(
@@ -230,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: [1, 2, 3, 4, 5, 6, 7],
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       validator: (int? i) {
@@ -244,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>.multiSelection(
+                    child: Dropdown<int>.multiSelection(
                       items: [1, 2, 3, 4, 5, 6, 7],
                       validator: (List<int>? items) {
                         if (items == null || items.isEmpty)
@@ -261,7 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(padding: EdgeInsets.all(8)),
               Text("[custom popup background examples]"),
               Divider(),
-              DropdownSearch<String>(
+              Dropdown<String>(
                 items: List.generate(5, (index) => "$index"),
                 popupProps: PopupProps.menu(
                   fit: FlexFit.loose,
@@ -297,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<String>.multiSelection(
+                    child: Dropdown<String>.multiSelection(
                       key: _popupBuilderKey,
                       items: List.generate(30, (index) => "$index"),
                       popupProps: PopupPropsMultiSelection.dialog(
@@ -321,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<String>.multiSelection(
+                    child: Dropdown<String>.multiSelection(
                       key: _multiKey,
                       items: List.generate(30, (index) => "$index"),
                       popupProps: PopupPropsMultiSelection.dialog(
@@ -384,7 +384,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<UserModel>.multiSelection(
+                    child: Dropdown<UserModel>.multiSelection(
                       asyncItems: (String? filter) => getData(filter),
                       clearButtonProps: ClearButtonProps(isVisible: true),
                       popupProps: PopupPropsMultiSelection.modalBottomSheet(
@@ -406,7 +406,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       compareFn: (item, selectedItem) => item.id == selectedItem.id,
                       dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
+                        dropdownDecoration: InputDecoration(
                           labelText: 'Users *',
                           filled: true,
                           fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -417,7 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<UserModel>(
+                    child: Dropdown<UserModel>(
                       asyncItems: (String? filter) => getData(filter),
                       popupProps: PopupPropsMultiSelection.modalBottomSheet(
                         showSelectedItems: true,
@@ -426,7 +426,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       compareFn: (item, sItem) => item.id == sItem.id,
                       dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
+                        dropdownDecoration: InputDecoration(
                           labelText: 'User *',
                           filled: true,
                           fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -444,7 +444,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: List.generate(50, (i) => i),
                       popupProps: PopupProps.menu(
                         showSearchBox: true,
@@ -454,7 +454,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: List.generate(50, (i) => i),
                       popupProps: PopupProps.menu(
                         title: Text('With fit to loose and no constraints'),
@@ -471,7 +471,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Row(
                 children: [
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: List.generate(50, (i) => i),
                       popupProps: PopupProps.menu(
                         showSearchBox: true,
@@ -483,7 +483,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   Expanded(
-                    child: DropdownSearch<int>(
+                    child: Dropdown<int>(
                       items: List.generate(50, (i) => i),
                       popupProps: PopupProps.menu(
                         title: Text('fit to a specific width and height'),
@@ -503,7 +503,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(padding: EdgeInsets.all(8)),
               Text("[handle dropdown programmatically]"),
               Divider(),
-              DropdownSearch<int>(
+              Dropdown<int>(
                 key: _openDropDownProgKey,
                 items: [1, 2, 3],
               ),
@@ -526,7 +526,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(padding: EdgeInsets.all(8)),
               Text("[multiLevel items example]"),
               Divider(),
-              DropdownSearch<MultiLevelString>(
+              Dropdown<MultiLevelString>(
                 key: myKey,
                 items: myItems,
                 compareFn: (i1, i2) => i1.level1 == i2.level1,

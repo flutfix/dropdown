@@ -4,16 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../dropdown_search.dart';
+import '../../dropdown.dart';
 import 'checkbox_widget.dart';
 
 class SelectionWidget<T> extends StatefulWidget {
   final List<T> items;
   final ValueChanged<List<T>>? onChanged;
-  final DropdownSearchOnFind<T>? asyncItems;
-  final DropdownSearchItemAsString<T>? itemAsString;
-  final DropdownSearchFilterFn<T>? filterFn;
-  final DropdownSearchCompareFn<T>? compareFn;
+  final DropdownOnFind<T>? asyncItems;
+  final DropdownItemAsString<T>? itemAsString;
+  final DropdownFilterFn<T>? filterFn;
+  final DropdownCompareFn<T>? compareFn;
   final List<T> defaultSelectedItems;
   final PopupPropsMultiSelection<T> popupProps;
   final bool isMultiSelectionMode;
@@ -378,7 +378,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
       else
         return InkWell(
           // ignore pointers in itemBuilder
-          child: IgnorePointer(child: w),
+          child: w,
           onTap: _isDisabled(item) ? null : () => _handleSelectedItem(item),
         );
     } else {

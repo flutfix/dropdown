@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../dropdown_search.dart';
+import '../../dropdown.dart';
 
 class PopupProps<T> {
   ///popup title
@@ -9,7 +9,7 @@ class PopupProps<T> {
   ///the search box will be shown if true, hidden otherwise
   final bool showSearchBox;
 
-  final DropdownSearchPopupItemBuilder<T>? itemBuilder;
+  final DropdownPopupItemBuilder<T>? itemBuilder;
 
   /// object that passes all props to search field
   final TextFieldProps searchFieldProps;
@@ -39,7 +39,7 @@ class PopupProps<T> {
 
   ///defines if an item of the popup is enabled or not, if the item is disabled,
   ///it cannot be clicked
-  final DropdownSearchPopupItemEnabled<T>? disabledItemFn;
+  final DropdownPopupItemEnabled<T>? disabledItemFn;
 
   ///popup mode
   final Mode mode;
@@ -223,7 +223,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
   final OnItemRemoved<T>? onItemRemoved;
 
   ///widget used to show checked items in multiSelection mode
-  final DropdownSearchPopupItemBuilder<T>? selectionWidget;
+  final DropdownPopupItemBuilder<T>? selectionWidget;
 
   ///widget used to validate items in multiSelection mode
   final ValidationMultiSelectionBuilder<T>? validationWidgetBuilder;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../dropdown_search.dart';
+import '../../dropdown.dart';
 
 class FavoriteItemProps<T> {
   ///show or hide favorites items
