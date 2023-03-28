@@ -397,6 +397,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         checkBox: (cnt, checked) {
           return widget.popupProps.selectionWidget!(context, item, checked);
         },
+        showDefaultCheckBox: widget.popupProps.showDefaultCheckBox,
         interceptCallBacks: widget.popupProps.interceptCallBacks,
         textDirection: widget.popupProps.textDirection,
         layout: (context, isChecked) => _itemWidgetSingleSelection(item),
@@ -407,6 +408,7 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
     else
       return CheckBoxWidget(
         textDirection: widget.popupProps.textDirection,
+        showDefaultCheckBox: widget.popupProps.showDefaultCheckBox,
         interceptCallBacks: widget.popupProps.interceptCallBacks,
         layout: (context, isChecked) => _itemWidgetSingleSelection(item),
         isChecked: _isSelectedItem(item),
