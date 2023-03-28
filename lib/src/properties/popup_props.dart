@@ -225,6 +225,8 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
   ///widget used to show checked items in multiSelection mode
   final DropdownPopupItemBuilder<T>? selectionWidget;
 
+  final bool showDefaultCheckBox;
+
   ///widget used to validate items in multiSelection mode
   final ValidationMultiSelectionBuilder<T>? validationWidgetBuilder;
 
@@ -257,6 +259,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
     super.interceptCallBacks = false,
     this.onItemAdded,
     this.onItemRemoved,
+    this.showDefaultCheckBox = true,
     this.selectionWidget,
     this.validationWidgetBuilder,
     this.textDirection = TextDirection.ltr,
@@ -285,6 +288,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
     super.interceptCallBacks = false,
     this.onItemAdded,
     this.onItemRemoved,
+    this.showDefaultCheckBox = true,
     this.selectionWidget,
     this.validationWidgetBuilder,
     this.textDirection = TextDirection.ltr,
@@ -318,6 +322,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
     this.onItemAdded,
     this.onItemRemoved,
     this.selectionWidget,
+    this.showDefaultCheckBox = true,
     this.validationWidgetBuilder,
     this.textDirection = TextDirection.ltr,
   }) : super.dialog();
@@ -346,6 +351,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
     this.onItemAdded,
     this.onItemRemoved,
     this.selectionWidget,
+    this.showDefaultCheckBox = true,
     this.validationWidgetBuilder,
     this.textDirection = TextDirection.ltr,
   }) : super.bottomSheet();
@@ -374,6 +380,7 @@ class PopupPropsMultiSelection<T> extends PopupProps<T> {
     this.onItemAdded,
     this.onItemRemoved,
     this.selectionWidget,
+    this.showDefaultCheckBox = true,
     this.validationWidgetBuilder,
     this.textDirection = TextDirection.ltr,
   }) : super.modalBottomSheet();

@@ -7,6 +7,7 @@ class CheckBoxWidget extends StatefulWidget {
   final WidgetCheckBox? checkBox;
   final bool isChecked;
   final bool isDisabled;
+  final bool showDefaultCheckBox;
   final ValueChanged<bool?>? onChanged;
   final bool interceptCallBacks;
   final TextDirection textDirection;
@@ -15,6 +16,7 @@ class CheckBoxWidget extends StatefulWidget {
     Key? key,
     this.isChecked = false,
     this.isDisabled = false,
+    this.showDefaultCheckBox = true,
     this.layout,
     this.checkBox,
     this.interceptCallBacks = false,
@@ -52,9 +54,10 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               widget.layout != null ? Expanded(child: widget.layout!(context, v == true)) : Container(),
-              widget.checkBox != null
-                  ? widget.checkBox!(context, v == true)
-                  : Checkbox(value: v, onChanged: widget.isDisabled ? null : (b) {}),
+              if (widget.showDefaultCheckBox)
+                widget.checkBox != null
+                    ? widget.checkBox!(context, v == true)
+                    : Checkbox(value: v, onChanged: widget.isDisabled ? null : (b) {}),
             ],
           );
 
@@ -68,7 +71,7 @@ class _CheckBoxWidgetState extends State<CheckBoxWidget> {
                       isCheckedNotifier.value = !v;
                       if (widget.onChanged != null) widget.onChanged!(v);
                     },
-              child: IgnorePointer(child: w),
+              child: w,
             );
         },
       ),
