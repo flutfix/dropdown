@@ -106,7 +106,6 @@ class SelectionWidgetState<T> extends State<SelectionWidget<T>> {
         valueListenable: _selectedItemsNotifier,
         builder: (ctx, value, wdgt) {
           return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               _searchField(),
