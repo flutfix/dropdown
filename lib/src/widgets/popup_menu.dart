@@ -140,20 +140,6 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    final PopupMenuThemeData popupMenuTheme = PopupMenuTheme.of(context);
-    final menu = Material(
-      shape: menuModeProps.shape ?? popupMenuTheme.shape,
-      color: menuModeProps.backgroundColor ?? popupMenuTheme.color,
-      type: MaterialType.card,
-      elevation: menuModeProps.elevation ?? popupMenuTheme.elevation ?? 8.0,
-      clipBehavior: menuModeProps.clipBehavior,
-      borderRadius: menuModeProps.borderRadius,
-      animationDuration: menuModeProps.animationDuration,
-      shadowColor: menuModeProps.shadowColor,
-      borderOnForeground: menuModeProps.borderOnForeground,
-      child: child,
-    );
-
     return SizeTransition(
       sizeFactor: Tween(
         begin: 0.0,
@@ -164,10 +150,6 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
           curve: Curves.easeInOut,
         ),
       )..addListener(() => setState(() {})),
-      child: CustomSingleChildLayout(
-        delegate: _PopupMenuRouteLayout(context, position),
-        child: capturedThemes.wrap(menu),
-      ),
     );
   }
 }
