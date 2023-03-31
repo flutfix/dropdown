@@ -150,6 +150,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
           curve: Curves.easeInOut,
         ),
       )..addListener(() => setState(() {})),
+      child: child,
     );
   }
 }
