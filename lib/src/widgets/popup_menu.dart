@@ -7,7 +7,6 @@ Future<T?> showCustomMenu<T>({
   required MenuProps menuModeProps,
   required RelativeRect position,
   required Widget child,
-  Widget Function(Animation<double> animation, Widget child)? customTransitions,
 }) {
   final NavigatorState navigator = Navigator.of(context);
   return navigator.push(
@@ -16,7 +15,6 @@ Future<T?> showCustomMenu<T>({
       position: position,
       child: child,
       menuModeProps: menuModeProps,
-      customTransitions: customTransitions,
       capturedThemes: InheritedTheme.capture(
         from: context,
         to: navigator.context,
@@ -93,10 +91,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     required this.position,
     required this.capturedThemes,
     required this.child,
-    this.customTransitions,
   });
-
-  final Widget Function(Animation<double> animation, Widget child)? customTransitions;
 
   @override
   Duration get transitionDuration => menuModeProps.animationDuration;
@@ -145,8 +140,8 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    if (customTransitions != null) {
-      return this.customTransitions!(animation, child);
+    if (menuModeProps.buildTransitions != null) {
+      return menuModeProps.buildTransitions!(animation, child);
     } else {
       return child;
     }
