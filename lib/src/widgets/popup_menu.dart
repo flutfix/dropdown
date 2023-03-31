@@ -163,7 +163,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
           parent: menuModeProps.animation!,
           curve: Curves.easeInOut,
         ),
-      ),
+      )..addListener(() => setState(() {})),
       child: CustomSingleChildLayout(
         delegate: _PopupMenuRouteLayout(context, position),
         child: capturedThemes.wrap(menu),
