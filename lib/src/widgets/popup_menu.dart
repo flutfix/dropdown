@@ -132,4 +132,17 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
       child: capturedThemes.wrap(menu),
     );
   }
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: child,
+    );
+  }
 }
