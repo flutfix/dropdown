@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../properties/menu_props.dart';
@@ -141,7 +142,15 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     Widget child,
   ) {
     return SizeTransition(
-      sizeFactor: animation,
+      sizeFactor: Tween(
+        begin: 0.0,
+        end: 1.0,
+      ).animate(
+        CurvedAnimation(
+          parent: menuModeProps.animation!,
+          curve: Curves.easeInOut,
+        ),
+      ),
       child: child,
     );
   }
