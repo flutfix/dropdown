@@ -141,7 +141,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     Widget child,
   ) {
     return RotationTransition(
-      turns: animation,
+      turns: Tween<double>(begin: 0, end: 90).animate(animation),
       child: child,
     );
   }
