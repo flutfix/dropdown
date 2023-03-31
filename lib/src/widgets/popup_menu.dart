@@ -140,8 +140,8 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    return SizeTransition(
-      sizeFactor: Tween(
+    return RotationTransition(
+      turns: Tween(
         begin: 0.0,
         end: 1.0,
       ).animate(
